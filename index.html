@@ -1,1 +1,84 @@
-<!DOCTYPE html><html><head><meta charset='utf-8'><title>Firebase Chat</title><link rel='stylesheet' href='style.css'></head><body><div id='app'>تطبيق المحادثة</div><script src='https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js'></script><script src='https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js'></script><script src='script.js'></script></body></html>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تطبيق المحادثة</title>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f6f0e9;
+      text-align: center;
+      direction: rtl;
+    }
+    #chat {
+      max-width: 500px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    #messages {
+      text-align: right;
+      height: 300px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      background: #fafafa;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>تطبيقي للمحادثة</h2>
+
+  <div id="chat">
+    <div>
+      <input type="text" id="username" placeholder="اسمك">
+    </div>
+    <div id="messages"></div>
+    <input type="text" id="messageInput" placeholder="اكتب رسالة">
+    <button onclick="sendMessage()">إرسال</button>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyALUR6K0iDcJ2WnyBz9jzmNyXVsXsnYAXY",
+      authDomain: "call-ace0f.firebaseapp.com",
+      databaseURL: "https://call-ace0f-default-rtdb.firebaseio.com",
+      projectId: "call-ace0f",
+      storageBucket: "call-ace0f.appspot.com",
+      messagingSenderId: "936648676436",
+      appId: "1:936648676436:web:c773c7b6b42ff2a999c9c1"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const messagesDiv = document.getElementById('messages');
+
+    function sendMessage() {
+      const msg = document.getElementById("messageInput").value;
+      const user = document.getElementById("username").value || "مجهول";
+      if (!msg) return;
+      db.ref("chat").push({ user, msg });
+      document.getElementById("messageInput").value = "";
+    }
+
+    db.ref("chat").on("child_added", (data) => {
+      const { user, msg } = data.val();
+      const msgEl = document.createElement("div");
+      msgEl.innerText = `${user}: ${msg}`;
+      messagesDiv.appendChild(msgEl);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    });
+  </script>
+</body>
+</html>
