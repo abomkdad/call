@@ -1,84 +1,55 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>تطبيق المحادثة</title>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <meta charset="UTF-8" />
+  <title>تسجيل الدخول</title>
   <style>
     body {
       font-family: sans-serif;
-      background: #f6f0e9;
+      background-color: #fdf6ef;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-box {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: center;
-      direction: rtl;
     }
-    #chat {
-      max-width: 500px;
-      margin: 40px auto;
-      background: white;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 0 10px #ccc;
-    }
-    #messages {
-      text-align: right;
-      height: 300px;
-      overflow-y: auto;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
+    input {
       padding: 10px;
-      background: #fafafa;
+      width: 200px;
+      margin-bottom: 15px;
     }
-    input, button {
-      padding: 10px;
-      margin: 5px;
+    button {
+      padding: 10px 20px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <h2>تطبيقي للمحادثة</h2>
-
-  <div id="chat">
-    <div>
-      <input type="text" id="username" placeholder="اسمك">
-    </div>
-    <div id="messages"></div>
-    <input type="text" id="messageInput" placeholder="اكتب رسالة">
-    <button onclick="sendMessage()">إرسال</button>
+  <div class="login-box">
+    <h2>ادخل اسمك لبدء المحادثة</h2>
+    <input type="text" id="username" placeholder="اسم المستخدم" />
+    <br />
+    <button onclick="enterChat()">دخول</button>
   </div>
 
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyALUR6K0iDcJ2WnyBz9jzmNyXVsXsnYAXY",
-      authDomain: "call-ace0f.firebaseapp.com",
-      databaseURL: "https://call-ace0f-default-rtdb.firebaseio.com",
-      projectId: "call-ace0f",
-      storageBucket: "call-ace0f.appspot.com",
-      messagingSenderId: "936648676436",
-      appId: "1:936648676436:web:c773c7b6b42ff2a999c9c1"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    const messagesDiv = document.getElementById('messages');
-
-    function sendMessage() {
-      const msg = document.getElementById("messageInput").value;
-      const user = document.getElementById("username").value || "مجهول";
-      if (!msg) return;
-      db.ref("chat").push({ user, msg });
-      document.getElementById("messageInput").value = "";
+    function enterChat() {
+      const name = document.getElementById('username').value.trim();
+      if (name) {
+        localStorage.setItem('chat_name', name);
+        window.location.href = "chat.html"; // صفحة المحادثة
+      } else {
+        alert("رجاءً أدخل اسمك");
+      }
     }
-
-    db.ref("chat").on("child_added", (data) => {
-      const { user, msg } = data.val();
-      const msgEl = document.createElement("div");
-      msgEl.innerText = `${user}: ${msg}`;
-      messagesDiv.appendChild(msgEl);
-      messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    });
   </script>
+
 </body>
 </html>
