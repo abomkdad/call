@@ -1,11 +1,11 @@
 const firebaseConfig = {
-  apiKey: "XXX",
-  authDomain: "XXX.firebaseapp.com",
-  databaseURL: "https://XXX.firebaseio.com",
-  projectId: "XXX",
-  storageBucket: "XXX.appspot.com",
-  messagingSenderId: "XXX",
-  appId: "XXX"
+  apiKey: "اكتب هنا ال apiKey من Firebase",
+  authDomain: "call-ace0f.firebaseapp.com",
+  databaseURL: "https://call-ace0f-default-rtdb.firebaseio.com/",
+  projectId: "call-ace0f",
+  storageBucket: "call-ace0f.appspot.com",
+  messagingSenderId: "اكتب هنا",
+  appId: "اكتب هنا"
 };
 
 firebase.initializeApp(firebaseConfig);
