@@ -1,49 +1,1 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>محادثة خاصة</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div id="loginScreen">
-    <h2>ادخل الكود للدخول</h2>
-    <input id="codeInput" placeholder="مثال: mad123">
-    <input id="nameInput" placeholder="اسمك">
-    <button onclick="enterChat()">دخول</button>
-  </div>
-
-  <div id="chatScreen">
-    <div class="messages" id="messages"></div>
-    <form id="form" onsubmit="sendMessage(event)">
-      <input id="input" autocomplete="off" placeholder="اكتب رسالة..." />
-      <button id="send">إرسال</button>
-    </form>
-
-    <div class="video-buttons">
-      <button onclick="startCall()">بدء مكالمة فيديو</button>
-      <button onclick="joinCall()">انضم للمكالمة</button>
-    </div>
-    <div id="videoContainer">
-      <video id="localVideo" autoplay muted></video>
-      <video id="remoteVideo" autoplay></video>
-    </div>
-  </div>
-
-  <div id="callModal">
-    <div class="modal-content">
-      <h3>📞 اتصال وارد</h3>
-      <p id="callerName">شخص ما يحاول الاتصال بك</p>
-      <button onclick="acceptCall()">رد</button>
-      <button onclick="declineCall()">رفض</button>
-    </div>
-  </div>
-
-  <audio id="ringtone" src="https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg"></audio>
-
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html><head><meta charset='utf-8'><title>Firebase Chat</title><link rel='stylesheet' href='style.css'></head><body><div id='app'>تطبيق المحادثة</div><script src='https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js'></script><script src='https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js'></script><script src='script.js'></script></body></html>
